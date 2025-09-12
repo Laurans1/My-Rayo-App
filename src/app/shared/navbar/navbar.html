@@ -1,0 +1,224 @@
+<!-- NAVBAR -->
+<nav
+  class="fixed top-0 left-0 w-full bg-white shadow-md z-50 flex items-center justify-between px-6 h-[50px]"
+>
+  <!-- BOTÓN MENÚ -->
+  <button
+    (click)="menuOpen = !menuOpen; itemsOpen = false"
+    class="flex items-center gap-1 bg-blue-600 text-white px-[8px] h-[38px] rounded text-[14px]"
+  >
+    ☰ <span class="uppercase font-bold">Menú</span>
+  </button>
+
+
+<!-- OVERLAY oscuro (aparece cuando menú lateral está abierto) -->
+<div *ngIf="menuOpen"
+     class="fixed inset-0 bg-black bg-opacity-40 z-40"
+     (click)="menuOpen = false">
+</div>
+<!-- MENÚ LATERAL IZQUIERDO -->
+<div
+  *ngIf="menuOpen"
+  class="fixed top-0 left-0 h-full w-72  shadow-lg z-50 transition-transform transform"
+>
+  <ul class="flex flex-col text-center">
+    <li class="bg-blue-600 text-white font-semibold py-4 px-6 hover:bg-blue-700 cursor-pointer h-[150px] flex items-center justify-center">
+      ¡Pedir mi crédito ya!
+    </li>
+    <li class="bg-yellow-400 text-white font-semibold py-4 px-6 hover:bg-yellow-500 cursor-pointer h-[150px] flex items-center justify-center">
+      Requisitos
+    </li>
+    <li class="bg-blue-600 text-white font-semibold py-4 px-6 hover:bg-blue-700 cursor-pointer h-[150px] flex items-center justify-center">
+      Medios de pago
+    </li>
+    <li class="bg-yellow-400 text-white font-semibold py-4 px-6 hover:bg-yellow-500 cursor-pointer h-[150px] flex items-center justify-center">
+      Calcula tu crédito
+    </li>
+  </ul>
+</div>
+
+  <!-- LOGO -->
+  <a routerLink="/" class="flex items-center gap-2">
+    <img src="/images/logo.webp" alt="Logo" class="h-10 bg-white">
+  </a>
+  <!-- MENÚ PRINCIPAL DESKTOP -->
+  <ul class="hidden xl:flex flex-nowrap gap-6 text-sm text-gray-700 ml-6">
+    <!-- QUIÉNES SOMOS -->
+    <li class="relative group">
+      <a class="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+        ¿Quiénes somos? ▼
+      </a>
+      <ul class="absolute left-0 hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500 w-48">
+        <li><a routerLink="/quienes-somos/historia" class="block px-4 py-2 hover:bg-gray-100">Nuestra historia</a></li>
+        <li><a routerLink="/quienes-somos/mision" class="block px-4 py-2 hover:bg-gray-100">Misión</a></li>
+        <li><a routerLink="/quienes-somos/vision" class="block px-4 py-2 hover:bg-gray-100">Visión</a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="relative group">
+      <a class="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+        Servicios ▼
+      </a>
+      <ul class="absolute left-0 hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500 w-48">
+        <li><a routerLink="/servicios/prestamos" class="block px-4 py-2 hover:bg-gray-100">Préstamos al instante</a></li>
+        <li><a routerLink="/servicios/creditos" class="block px-4 py-2 hover:bg-gray-100">Créditos personales</a></li>
+      </ul>
+    </li>
+
+    <!-- MÁS ENLACES -->
+    <li><a routerLink="/beneficios" class="hover:text-blue-600">Beneficios</a></li>
+    <li><a routerLink="/testimonios" class="hover:text-blue-600">Testimonios</a></li>
+    <li><a routerLink="/blog" class="hover:text-blue-600">Blog</a></li>
+    <li><a routerLink="/noticias" class="hover:text-blue-600">Noticias</a></li>
+
+    <!-- AYUDA -->
+    <li class="relative group">
+      <a class="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+        Ayuda ▼
+      </a>
+      <ul class="absolute left-0 hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500 w-48">
+        <li><a routerLink="/ayuda/preguntas" class="block px-4 py-2 hover:bg-gray-100">Preguntas frecuentes</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- BOTONES DERECHA -->
+  <div class="flex items-center h-full">
+    <div class="flex items-center h-full">
+      <!-- Refiere y gana -->
+      <button
+        type="button"
+        class="flex items-center gap-1.5 text-sm bg-red-600 text-white uppercase font-medium px-4 h-full 
+               hover:bg-blue-700 transition-all duration-300 cursor-pointer rounded-l-md"
+      >
+        <span>Refiere y gana</span>
+        <span class="text-xs">$</span>
+      </button>
+
+      <!-- Pagar -->
+      <button
+        type="button"
+        class="flex items-center gap-1.5 text-sm bg-orange-400 text-white uppercase font-medium px-4 h-full 
+               hover:bg-blue-500 transition-all duration-300 cursor-pointer"
+      >
+        <span>Pagar</span>
+        <span class="text-xs">$</span>
+      </button>
+
+      <!-- Pedir crédito -->
+      <a
+        routerLink=""
+        fragment="calculadora"
+        class="flex items-center gap-1.5 text-sm bg-yellow-400 text-white uppercase font-medium px-4 h-full 
+               hover:bg-blue-300 transition-all duration-300 cursor-pointer"
+      >
+        <span>Pedir mi crédito ya</span>
+        <span class="text-xs">→</span>
+      </a>
+    </div>
+
+    <!-- Sesión -->
+    <a
+      routerLink="/auth/login"
+      class="flex items-center gap-2 text-sm bg-blue-600 text-white uppercase font-medium px-4 h-full ml-2
+             hover:bg-yellow-400 transition-all duration-300 cursor-pointer rounded-md"
+    >
+      <span>Sesión</span>
+    </a>
+  </div>
+</nav>
+
+<!-- OVERLAY oscuro (aparece cuando menú lateral está abierto) -->
+<div *ngIf="menuOpen"
+     class="fixed inset-0 bg-black bg-opacity-40 z-40"
+     (click)="menuOpen = false">
+</div>
+
+<!-- MENÚ LATERAL IZQUIERDO -->
+<div
+  *ngIf="menuOpen"
+  class="fixed top-0 left-0 h-full w-72  shadow-lg z-50 transition-transform transform"
+>
+  <ul class="flex flex-col text-center">
+    <li class="bg-blue-600 text-white font-semibold py-4 px-6 hover:bg-blue-700 cursor-pointer h-[150px] flex items-center justify-center">
+      ¡Pedir mi crédito ya!
+    </li>
+    <li class="bg-yellow-400 text-white font-semibold py-4 px-6 hover:bg-yellow-500 cursor-pointer h-[150px] flex items-center justify-center">
+      Requisitos
+    </li>
+    <li class="bg-blue-600 text-white font-semibold py-4 px-6 hover:bg-blue-700 cursor-pointer h-[150px] flex items-center justify-center">
+      Medios de pago
+    </li>
+    <li class="bg-yellow-400 text-white font-semibold py-4 px-6 hover:bg-yellow-500 cursor-pointer h-[150px] flex items-center justify-center">
+      Calcula tu crédito
+    </li>
+  </ul>
+</div>
+
+  <!-- BOTÓN MENÚ HAMBURGUESA (Items) -->
+  <div class="xl:hidden">
+    <button
+      (click)="itemsOpen = !itemsOpen; menuOpen = false"
+      class="flex items-center gap-1 bg-blue-600 text-white px-3 h-full rounded"
+    >
+      ☰ <span class="uppercase text-sm">Items</span>
+    </button>
+  </div>
+  
+<!-- MENÚ RESPONSIVE (Items) -->
+<div *ngIf="itemsOpen" class="xl:hidden fixed top-[50px] right-0 w-72 bg-white shadow-lg z-50 rounded-b-lg">
+  <ul class="flex flex-col text-gray-700 text-sm font-medium">
+    <!-- QUIÉNES SOMOS -->
+    <li class="relative group border-b">
+      <a class="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer">
+        ¿Quiénes somos? <span>›</span>
+      </a>
+      <ul class="hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500">
+        <li><a routerLink="/quienes-somos/historia" class="block px-6 py-2 hover:bg-gray-100">Nuestra historia</a></li>
+        <li><a routerLink="/quienes-somos/mision" class="block px-6 py-2 hover:bg-gray-100">Misión</a></li>
+        <li><a routerLink="/quienes-somos/vision" class="block px-6 py-2 hover:bg-gray-100">Visión</a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="relative group border-b">
+      <a class="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer">
+        Servicios <span>›</span>
+      </a>
+      <ul class="hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500">
+        <li><a routerLink="/servicios/prestamos" class="block px-6 py-2 hover:bg-gray-100">Préstamos al instante</a></li>
+        <li><a routerLink="/servicios/creditos" class="block px-6 py-2 hover:bg-gray-100">Créditos personales</a></li>
+      </ul>
+    </li>
+
+    <!-- ENLACES DIRECTOS -->
+    <li><a routerLink="/beneficios" class="block px-4 py-3 hover:bg-gray-100 border-b">Beneficios</a></li>
+    <li><a routerLink="/testimonios" class="block px-4 py-3 hover:bg-gray-100 border-b">Testimonios</a></li>
+    <li><a routerLink="/blog" class="block px-4 py-3 hover:bg-gray-100 border-b">Blog</a></li>
+    <li><a routerLink="/noticias" class="block px-4 py-3 hover:bg-gray-100 border-b">Noticias</a></li>
+
+    <!-- AYUDA -->
+    <li class="relative group border-b">
+      <a class="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer">
+        Ayuda <span>›</span>
+      </a>
+      <ul class="hidden group-hover:block bg-white shadow-md border-t-2 border-orange-500">
+        <li><a routerLink="/ayuda/preguntas" class="block px-6 py-2 hover:bg-gray-100">Preguntas frecuentes</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- BOTONES con colores -->
+  <div class="flex flex-col text-white text-sm font-bold mt-2">
+    <button type="button" class="flex items-center justify-between w-full px-4 py-3 bg-red-600 hover:bg-red-700">
+      <span>$ Refiere y gana</span>
+    </button>
+    <button type="button" class="flex items-center justify-between w-full px-4 py-3 bg-orange-500 hover:bg-orange-600">
+      <span>$ Pagar</span>
+    </button>
+    <a routerLink="" fragment="calculadora" class="flex items-center justify-between w-full px-4 py-3 bg-yellow-400 hover:bg-yellow-500">
+      <span>→ Pedir mi crédito ya</span>
+    </a>
+  </div>
+</div>

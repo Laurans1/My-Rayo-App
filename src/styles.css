@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.decorated-title {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centra el título con las líneas */
+  gap: 1rem;
+  max-width: 500px; /*  ancho total limitado */
+  margin: 0 auto; /* lo centra en la página */
+}
+
+.decorated-title::before,
+.decorated-title::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px dashed #4CC9F0; /*  azul celeste + más grueso */
+  opacity: 0.8;
+}

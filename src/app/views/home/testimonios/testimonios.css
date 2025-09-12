@@ -1,0 +1,33 @@
+/* Testimonios: estilos específicos */
+
+.testimonios-section {
+  position: relative;
+}
+
+/* Ajustar contenedor del testimonio */
+.testimonio-card {
+  position: relative;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+/* Avatar dentro del testimonio */
+.testimonio-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Flechas del carrusel */
+.testimonio-nav-btn {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+.testimonio-nav-btn:hover {
+  background: #f9fafb;
+}

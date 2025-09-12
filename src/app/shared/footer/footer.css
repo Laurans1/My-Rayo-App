@@ -1,0 +1,9 @@
+/* Ajustes de los links */
+footer a {
+  transition: color 0.2s ease-in-out;
+}
+
+/* Iconos de redes */
+footer i {
+  font-size: 1.2rem;
+}
