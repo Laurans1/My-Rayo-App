@@ -13,37 +13,26 @@ export class Navbar {
   // Estado del menú lateral izquierdo ("Menú")
   menuOpen = false;
 
-  // Estado del panel derecho "Items"
-  itemsOpen = false;
-
-  // Detectar clicks en el documento
+  
+   // Detecta clicks fuera del menú para cerrarlo automáticamente
+   
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     const target = event.target as HTMLElement;
 
-    // Si se hace click en botones o dentro de los menús, no cerrar
-    if (
-      target.closest('nav') ||
-      target.closest('.menu-lateral') ||
-      target.closest('.menu-items')
-    ) {
+    // Si el click fue dentro del nav o del menú lateral → no cerrar
+    if (target.closest('nav') || target.closest('.menu-lateral')) {
       return;
     }
 
-    // Cerrar ambos menús si el click fue fuera
+    // Si el click fue fuera → cerrar menú
     this.menuOpen = false;
-    this.itemsOpen = false;
   }
 
-  // Alternar menú lateral izquierdo
+  
+    //Alterna el menú lateral izquierdo
+  
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
-    if (this.menuOpen) this.itemsOpen = false;
-  }
-
-  // Alternar panel derecho Items
-  toggleItems() {
-    this.itemsOpen = !this.itemsOpen;
-    if (this.itemsOpen) this.menuOpen = false;
   }
 }
