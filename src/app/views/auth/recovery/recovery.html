@@ -1,6 +1,5 @@
 <!-- Vista Recovery -->
 <div class="flex flex-col items-center mt-32 mb-12 px-4">
-  <!-- Caja del formulario -->
   <div class="bg-white shadow-md border border-gray-200 rounded-lg p-8 w-full max-w-md text-center">
     <!-- Título -->
     <h2 class="flex items-center text-sm font-bold text-orange-600 uppercase mb-4">
@@ -9,37 +8,56 @@
       <span class="flex-1 h-px bg-gray-300 ml-2"></span>
     </h2>
 
-    <!-- Título secundario -->
     <h3 class="text-xl font-bold text-blue-700 mb-6">Mi cuenta Rayo</h3>
 
-    <!-- Input nueva contraseña -->
-    <input
-      type="password"
-      [(ngModel)]="nuevaContrasena"
-      placeholder="Ingresa tu nueva contraseña"
-      class="bg-gray-200 w-full p-3 mb-4 border border-gray-400 hover:border-blue-500 rounded-md 
-             focus:ring-2 focus:ring-orange-400 outline-none"
-    />
+    <form [formGroup]="formRecovery" (ngSubmit)="onSubmit()">
+      <!-- Input nueva contraseña -->
+      <input
+        id="nuevaContrasena"
+        name="nuevaContrasena"
+        type="password"
+        formControlName="nuevaContrasena"
+        placeholder="Ingresa tu nueva contraseña"
+        class="bg-gray-200 w-full p-3 mb-4 border border-gray-400 rounded-md focus:ring-2 focus:ring-orange-400 outline-none"
+      />
+      @if (formRecovery.get('nuevaContrasena')?.invalid &&
+      formRecovery.get('nuevaContrasena')?.touched) {
+      <span> La nueva contraseña es requerida </span>
+      } @if (formRecovery.get('nuevaContrasena')?.touched &&
+      formRecovery.get('nuevaContrasena')?.errors?.['minlength']) {
+      <span> La nueva contraseña debe tener al menos 8 caracteres </span>
+      } @if (formRecovery.get('nuevaContrasena')?.touched &&
+      formRecovery.get('nuevaContrasena')?.errors?.['pattern']) {
+      <span>
+        La nueva contraseña debe contener al menos una letra mayúscula, una letra minúscula, un
+        número y un carácter especial
+      </span>
+      }
 
-    <!-- Input confirmar contraseña -->
-    <input
-      type="password"
-      [(ngModel)]="confirmarContrasena"
-      placeholder="Confirma tu nueva contraseña"
-      class="bg-gray-200 w-full p-3 mb-4 border border-gray-400 hover:border-blue-500 rounded-md 
-             focus:ring-2 focus:ring-orange-400 outline-none"
-    />
+      <!-- Input confirmar contraseña -->
+      <input
+        id="confirmarContrasena"
+        name="confirmarContrasena"
+        type="password"
+        formControlName="confirmarContrasena"
+        placeholder="Confirma tu nueva contraseña"
+        class="bg-gray-200 w-full p-3 mb-4 border border-gray-400 rounded-md focus:ring-2 focus:ring-orange-400 outline-none"
+      />
+      @if (formRecovery.get('confirmarContrasena')?.invalid &&
+      formRecovery.get('confirmarContrasena')?.touched) {
+      <span> La confirmación de la contraseña es requerida </span>
+      } @if (formRecovery.errors?.['passwordMismatch'] &&
+      formRecovery.get('confirmarContrasena')?.touched) {
+      <span> Las contraseñas no coinciden </span>
+      }
 
-    <!-- Botón actualizar -->
-    <button
-      (click)="actualizar()"
-      class="w-full py-3 rounded-md font-bold text-white bg-gradient-to-r from-orange-400 to-red-500 
-             hover:from-blue-600 hover:to-blue-400 transition flex justify-center items-center gap-2"
-    >
-      ACTUALIZAR
-    </button>
-
-    <!-- Mensaje de prueba -->
-    <p *ngIf="mensaje" class="mt-4 text-blue-600">{{ mensaje }}</p>
+      <!-- Botón actualizar -->
+      <button
+        type="submit"
+        class="w-full py-3 rounded-md font-bold text-white bg-gradient-to-r from-orange-400 to-red-500 hover:from-blue-600 hover:to-blue-400 transition flex justify-center items-center gap-2"
+      >
+        ACTUALIZAR
+      </button>
+    </form>
   </div>
 </div>

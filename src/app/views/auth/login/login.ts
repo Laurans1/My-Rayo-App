@@ -1,52 +1,42 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
+  imports: [CommonModule, ReactiveFormsModule],
   standalone: true,
-  imports: [FormsModule, NgIf],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  //  Variables del login
-  correo = '';
-  contrasena = '';
-  mensaje = '';
+  public formLogin = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
+    ]),
+  });
 
-  //  Variables del modal recovery
-  mostrarModal = false;
-  correoRecovery = '';
-  mensajeRecovery = '';
+  public onSubmit() {
+    if (this.formLogin.valid) {
+      console.log(this.formLogin.value);
+    } else {
+      this.formLogin.markAllAsTouched();
+    }
+  }
 
-  //  Abre el modal de recuperación
+  // Variable del modal
+  showModal = false;
+
+  // Abrir modal
   abrirModal() {
-    this.mostrarModal = true;
+    this.showModal = true;
   }
 
-  //  Cierra el modal
+  // Cerrar modal
   cerrarModal() {
-    this.mostrarModal = false;
-    this.mensajeRecovery = '';
-    this.correoRecovery = '';
-  }
-
-  //  Simulación login (usuario fijo)
-  login() {
-    if (this.correo === 'test@correo.com' && this.contrasena === '123456') {
-      this.mensaje = 'Login correcto';
-    } else {
-      this.mensaje = 'Usuario o contraseña incorrectos';
-    }
-  }
-
-  //  Simulación recuperación (solo funciona con correo válido)
-  recuperar() {
-    if (this.correoRecovery === 'test@correo.com') {
-      this.mensajeRecovery = `Se envió un correo a ${this.correoRecovery} `;
-    } else {
-      this.mensajeRecovery = ' Este correo no está registrado';
-    }
+    this.showModal = false;
   }
 }
