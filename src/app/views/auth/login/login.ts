@@ -12,7 +12,7 @@ import { AuthService } from '../../../services/auth.service'; //importar el serv
 })
 export class Login {
   public formLogin = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    userName: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -24,7 +24,7 @@ export class Login {
     mensaje = '';
     cargando = false;
 
-     constructor(private authService: AuthService) {} // Inyectar el servicio
+     constructor(private readonly authService: AuthService) {} // Inyectar el servicio
 
 
   // Método que se ejecuta al enviar el formulario
@@ -37,7 +37,7 @@ export class Login {
 
 // Preparo los datos que se enviarán a la API
     const datos = {
-      email: this.formLogin.get('email')?.value!,
+      userName: this.formLogin.get('userName')?.value!,
       password: this.formLogin.get('password')?.value!,
     };
 
@@ -49,8 +49,16 @@ export class Login {
       next: (respuesta) => {
         this.cargando = false;
         // Si la API responde con un token → login exitoso
-        if (respuesta && respuesta.token) {
-          localStorage.setItem('token', respuesta.token); // Guardamos el token
+        if (respuesta && Number(respuesta['Solicitud']['CODIGO']) === 200) {
+          // localStorage.setItem('token', respuesta.token); // Guardamos el token
+          if (respuesta['Solicitud']['CLIENTE']) {
+            localStorage.setItem('clienteId', respuesta['Solicitud']['CLIENTE']);
+          }
+          if (respuesta['Solicitud']['CONTACTO']) {
+            localStorage.setItem('contactoId', respuesta['Solicitud']['CONTACTO']);
+          }
+          // respuesta['Solicitud']['CONTACTO'] && localStorage.setItem('contactoId', respuesta['Solicitud']['CONTACTO']);
+          // respuesta['Solicitud']['CLIENTE'] && localStorage.setItem('clienteId', respuesta['Solicitud']['CLIENTE']);
           this.mensaje = 'Login exitoso';
         } else {
           this.mensaje = 'Respuesta inesperada';
