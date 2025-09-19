@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-recovery',
@@ -11,7 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class Recovery {
   // Validador personalizado para verificar si las contraseñas coinciden
-  private passwordsMatchValidator(control: import('@angular/forms').AbstractControl) {
+  private passwordsMatchValidator(control: AbstractControl) {
     const form = control as FormGroup;
     const nuevaContrasena = form.get('nuevaContrasena')?.value;
     const confirmarContrasena = form.get('confirmarContrasena')?.value;

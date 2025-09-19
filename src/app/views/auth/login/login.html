@@ -54,11 +54,16 @@
       <!-- Botón ingresar -->
       <button
         type="submit"
+        [disabled]="cargando"
         class="w-full py-3 rounded-md font-bold text-white bg-gradient-to-r from-orange-400 to-red-500 hover:from-blue-600 hover:to-blue-400 transition flex justify-center items-center gap-2"
       >
-        INGRESAR
+        <span [textContent]="cargando ? 'Ingresando...' : 'INGRESAR'"></span>
       </button>
     </form>
+
+<!-- Mensaje de login -->
+<p *ngIf="mensaje" class="mt-4 text-blue-600 font-semibold">{{ mensaje }}</p>
+
 
     <!-- Enlace Olvidó contraseña -->
     <p class="text-center mt-4">
